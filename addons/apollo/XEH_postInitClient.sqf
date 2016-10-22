@@ -43,5 +43,9 @@ if (!hasInterface) exitWith {};
     // Load client, add inventory one frame after removing initial inventory to prevent possible inventory desync
     player allowDamage false;
     player setUnitLoadout [[],[],[],[],[],[],"","",[],["","","","","",""]];
-    [FUNC(playerLoadClient), [player]] call CBA_fnc_execNextFrame;
+    [{
+        if (_this call FUNC(playerLoadClient)) then {
+            INFO("Client loaded successfully.");
+        };
+    }, [player]] call CBA_fnc_execNextFrame;
 }] call CBA_fnc_addEventHandler;
