@@ -15,13 +15,22 @@
  * [cursorObject, "Hard drive", parseText "weeeee <br/> Second line"] call tac_intel_fnc_newIntel;
 */
 #include "script_component.hpp"
-params [["_object", objNull, [objNull]],  ["_intelName", "", [""]], ["_intelText", "", [""]], ["_intelType", 1, [1]]];
+if (!params [["_object", objNull, [objNull]],  ["_intelName", "", [""]], ["_intelText", "", [""]], ["_intelType", 1, [1]]]) exitWith {
+    ERROR("Bad Params");
+};
 
-if !(isServer || {_object getVariable ["cba_xeh_isInitialized", false]}) exitWith {};
+if (!isServer) exitWith {
+    ERROR("Function is only allowed to be called on the server");
+};
+
+GVAR(intelID) = GVAR(intelID) + 1;
+
+if !(_object isKindOf "CAManBase") then {
+    [QGVAR(addACEInteraction), [_object], "intel" + str GVAR(intelID)] call CBA_fnc_globalEventJIP;
+};
 
 private _ownedIntel = _object getVariable [QGVAR(intel), []];
 
-GVAR(intelID) = GVAR(intelID) + 1;
 _ownedIntel pushbackUnique [GVAR(intelID), _intelName, _intelText, _intelType];
 
 _object setVariable [QGVAR(intel), _ownedIntel, true];

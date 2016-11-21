@@ -3,14 +3,14 @@ class CfgVehicles {
     class CAManBase: Man {
         class ACE_Actions {
             class ACE_MainActions {
-                class Theseus_Intel {
+                class GVAR(intelNodeMain) {
                     displayName = "Intel";//To be localized
                     condition = QUOTE(GVAR(enabled));
                     statement = "";
                     showDisabled = 0;
                     priority = 2;
 
-                    class Theseus_GetIntel {
+                    class GVAR(getIntel) {
                         displayName = "Get intel";//To be localized
                         condition =  QUOTE(!isPlayer _target || (!alive _target) || (_target getVariable [ARR_2('ACE_isUnconscious',false)]));
                         statement = QUOTE([(_this select 0)] call FUNC(getIntel));
@@ -18,14 +18,14 @@ class CfgVehicles {
                         priority = 2;
                     };
 
-                     class Theseus_ShareIntel {
+                     class GVAR(shareIntel) {
                         displayName = "Share intel";//To be localized
                         condition = QUOTE(!((_this select 1) getVariable QQGVAR(intel) isEqualTo []));
                         statement = "";
                         showDisabled = 0;
                         priority = 2;
 
-                        class Theseus_ShareIntelHeard {
+                        class GVAR(shareIntelHeard) {
                             displayName = "Heard intel";//To be localized
                             condition = QUOTE(count (((_this select 1) getVariable QQGVAR(intel)) select {_x select 3 == 0}) > 0 && {isPlayer _target});
                             statement = "";
@@ -34,7 +34,7 @@ class CfgVehicles {
                             priority = 2;
                         };
 
-                        class Theseus_ShareIntelObject {
+                        class GVAR(shareIntelObject) {
                             displayName = "Objects";//To be localized
                             condition = QUOTE(count (((_this select 1) getVariable QQGVAR(intel)) select {_x select 3 == 1}) > 0 && {isPlayer _target});
                             statement = ""
@@ -47,14 +47,14 @@ class CfgVehicles {
             };
         };
         class ACE_SelfActions {
-            class Theseus_intelSelf {
+            class GVAR(intelNodeSelf) {
                 displayName = "Intel";//To be localized
                 condition = QUOTE(GVAR(enabled));
                 statement = "";
                 showDisabled = 1;
                 priority = 2;
 
-                class Theseus_heardIntel {
+                class GVAR(heardIntel) {
                     displayName = "Heard";//To be localized
                     condition = QUOTE(GVAR(enabled));
                     statement = "";
@@ -62,7 +62,7 @@ class CfgVehicles {
                     priority = 2;
                 };
 
-                class Theseus_objectIntel {
+                class GVAR(objectIntel) {
                     displayName = "Objects";//To be localized
                     condition = QUOTE(GVAR(enabled));
                     statement = "";
