@@ -16,6 +16,7 @@ params ["_target"];
 
 private _intelEntries = _target getVariable QGVAR(intel);
 private _ownedIntel = player getVariable [QGVAR(intel), []];
+private _addedIntel = [];
 
 // Only allow to pick object intel if target is unconscious or dead
 if (_target getVariable ['ACE_isUnconscious', false] || {!alive _target}) then {
@@ -42,11 +43,13 @@ if (_target getVariable ['ACE_isUnconscious', false] || {!alive _target}) then {
 
     private _actionFullPath = [player, 1, ["ACE_SelfActions", "Theseus_intelSelf", (["Theseus_heardIntel", "Theseus_objectIntel"] select _intelType)], _actionID] call ace_interact_menu_fnc_addActionToObject;
 
-    _ownedIntel pushBackUnique [_intelID, _intelName, _intelText, _intelType, _actionFullPath];
+    _addedIntel pushBackUnique [_intelID, _intelName, _intelText, _intelType, _actionFullPath];
 } foreach _intelEntries;
 
+_ownedIntel = _ownedIntel + _addedIntel;
+
 // Notify player and set variable
-hintSilent parseText format ["%1 new heard intel obtained <br/> %2 new objects obtained", [({_x select 3 == 0} count (_ownedIntel - _intelEntries)), 0] select (isNil "_intelEntries"), [({_x select 3 == 1} count (_ownedIntel - _intelEntries)), 0] select (isNil "_intelEntries")];
+hintSilent parseText format ["%1 new heard intel obtained <br/> %2 new objects obtained", [({_x select 3 == 0} count _addedIntel), 0] select (isNil "_intelEntries"), [({_x select 3 == 1} count _addedIntel), 0] select (isNil "_intelEntries")];
 player setVariable [QGVAR(intel), _ownedIntel, true];
 
 // Remove var from target, object only for players, also remove check interactions
