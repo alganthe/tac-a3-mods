@@ -41,7 +41,7 @@ if (_target getVariable ['ACE_isUnconscious', false] || {!alive _target}) then {
         [_intelName, _intelText]
     ] call ace_interact_menu_fnc_createAction;
 
-    private _actionFullPath = [player, 1, ["ACE_SelfActions", "Theseus_intelSelf", (["Theseus_heardIntel", "Theseus_objectIntel"] select _intelType)], _actionID] call ace_interact_menu_fnc_addActionToObject;
+    private _actionFullPath = [player, 1, ["ACE_SelfActions", QGVAR(intelNodeSelf), ([QGVAR(heardIntel), QGVAR(objectIntel)] select _intelType)], _actionID] call ace_interact_menu_fnc_addActionToObject;
 
     _addedIntel pushBackUnique [_intelID, _intelName, _intelText, _intelType, _actionFullPath];
 } foreach _intelEntries;

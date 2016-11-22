@@ -26,7 +26,7 @@ if (!isServer) exitWith {
 GVAR(intelID) = GVAR(intelID) + 1;
 
 if !(_object isKindOf "CAManBase") then {
-    [QGVAR(addACEInteraction), [_object], "intel" + str GVAR(intelID)] call CBA_fnc_globalEventJIP;
+    [QGVAR(addACEInteraction), [_object, GVAR(intelID)], "intel" + str GVAR(intelID)] call CBA_fnc_globalEventJIP;
 };
 
 private _ownedIntel = _object getVariable [QGVAR(intel), []];

@@ -19,7 +19,7 @@
         {},
         [_intelName, _intelText]
     ] call ace_interact_menu_fnc_createAction;
-    private _actionFullPath = [_unit, 1, ["ACE_SelfActions", "Theseus_intelSelf", (["Theseus_heardIntel", "Theseus_objectIntel"] select _intelType)], _actionID] call ace_interact_menu_fnc_addActionToObject;
+    private _actionFullPath = [_unit, 1, ["ACE_SelfActions", QGVAR(intelNodeSelf), ([QGVAR(heardIntel), QGVAR(objectIntel)] select _intelType)], _actionID] call ace_interact_menu_fnc_addActionToObject;
 
     // Add the intel to the intel array with the new action path
     private _ownedIntel = _unit getVariable [QGVAR(intel), []];
@@ -28,7 +28,12 @@
 }] call CBA_fnc_addEventHandler;
 
 [QGVAR(addACEInteraction), {
-    params ["_object"];
+    params ["_object", "_intelID"];
+
+    if !(hasInterface) exitWith {};
+    if (isNull _object) exitWith {
+        ["", [], "intel" + _intelID] call CBA_fnc_globalEventJIP;
+    };
 
     private _actionID = [QGVAR(intelNodeMain), "Intel", "", {}, {GVAR(enabled)},
     {
