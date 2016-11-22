@@ -23,6 +23,9 @@ if (_target getVariable ['ACE_isUnconscious', false] || {!alive _target}) then {
     _intelEntries = (_target getVariable QGVAR(intel)) select {_x select 3 == 1};
 };
 
+// Avoid duplicate intel, needed since action paths should be unique to each player.
+_intelEntries = (_intelEntries apply {if (!isNil {_x select 4}) then {[(_x select 0), (_x select 1), (_x select 2), (_x select 3)]} else {_x}}) - _ownedIntel;
+
 // Add check interactions
 {
     _x params ["_intelID", "_intelName", "_intelText", "_intelType"];
