@@ -37,7 +37,7 @@ class CfgVehicles {
                         class GVAR(shareIntelObject) {
                             displayName = "Objects";//To be localized
                             condition = QUOTE(count (((_this select 1) getVariable QQGVAR(intel)) select {_x select 3 == 1}) > 0 && {isPlayer _target});
-                            statement = ""
+                            statement = "";
                             insertChildren = QUOTE([ARR_3(_this select 0, _this select 1, 1)] call FUNC(insertIntelChildren));
                             showDisabled = 0;
                             priority = 2;
