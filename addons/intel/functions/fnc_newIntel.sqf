@@ -6,7 +6,7 @@
  * 0: Object to add the intel to <OBJECT>
  * 1: Name shown in the interaction menu when checking the intel you have on you <STRING>
  * 2: Text of the intel <STRING>
- * 3: Type of intel <SCALAR> 0: Heard intel; 1: Object intel
+ * 3: Delete object when picked up <BOOL>
  *
  * Return value:
  * Nothing
@@ -15,7 +15,7 @@
  * [cursorObject, "Hard drive", parseText "weeeee <br/> Second line"] call tac_intel_fnc_newIntel;
 */
 #include "script_component.hpp"
-if (!params [["_object", objNull, [objNull]],  ["_intelName", "", [""]], ["_intelText", "", [""]], ["_intelType", 1, [1]]]) exitWith {
+if (!params [["_object", objNull, [objNull]],  ["_intelName", "", [""]], ["_intelText", "", [""]], ["_intelType", false, [false]]]) exitWith {
     ERROR("Bad Params");
 };
 

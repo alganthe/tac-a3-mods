@@ -15,7 +15,7 @@
  *
 */
 #include "script_component.hpp"
-params ["_target", "_player", "_type"];
+params ["_target", "_player"];
 
 private _actions = [];
 
@@ -33,6 +33,6 @@ private _actions = [];
         _x
     ] call ace_interact_menu_fnc_createAction;
     _actions pushBack [_action, [], _target];
-} forEach ((_player getVariable [QGVAR(intel), []]) select {_x select 3 == _type});
+} forEach (_player getVariable [QGVAR(intel), []]);
 
 _actions

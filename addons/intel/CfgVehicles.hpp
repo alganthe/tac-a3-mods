@@ -22,26 +22,9 @@ class CfgVehicles {
                         displayName = "Share intel";//To be localized
                         condition = QUOTE(!((_this select 1) getVariable QQGVAR(intel) isEqualTo []));
                         statement = "";
+                        insertChildren = QUOTE([ARR_2(_this select 0, _this select 1)] call FUNC(insertIntelChildren))
                         showDisabled = 0;
                         priority = 2;
-
-                        class GVAR(shareIntelHeard) {
-                            displayName = "Heard intel";//To be localized
-                            condition = QUOTE(count (((_this select 1) getVariable QQGVAR(intel)) select {_x select 3 == 0}) > 0 && {isPlayer _target});
-                            statement = "";
-                            insertChildren = QUOTE([ARR_3(_this select 0, _this select 1, 0)] call FUNC(insertIntelChildren));
-                            showDisabled = 0;
-                            priority = 2;
-                        };
-
-                        class GVAR(shareIntelObject) {
-                            displayName = "Objects";//To be localized
-                            condition = QUOTE(count (((_this select 1) getVariable QQGVAR(intel)) select {_x select 3 == 1}) > 0 && {isPlayer _target});
-                            statement = "";
-                            insertChildren = QUOTE([ARR_3(_this select 0, _this select 1, 1)] call FUNC(insertIntelChildren));
-                            showDisabled = 0;
-                            priority = 2;
-                        };
                     };
                 };
             };
@@ -53,22 +36,6 @@ class CfgVehicles {
                 statement = "";
                 showDisabled = 1;
                 priority = 2;
-
-                class GVAR(heardIntel) {
-                    displayName = "Heard";//To be localized
-                    condition = QUOTE(GVAR(enabled));
-                    statement = "";
-                    showDisabled = 1;
-                    priority = 2;
-                };
-
-                class GVAR(objectIntel) {
-                    displayName = "Objects";//To be localized
-                    condition = QUOTE(GVAR(enabled));
-                    statement = "";
-                    showDisabled = 1;
-                    priority = 2;
-                };
             };
         };
     };

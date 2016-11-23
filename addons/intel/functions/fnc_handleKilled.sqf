@@ -23,5 +23,3 @@ private _intelEntries = _unit getVariable [QGVAR(intel), []];
         [player, 1, _actionFullPath] call ace_interact_menu_fnc_removeActionFromObject;
     };
 } foreach _intelEntries;
-
-_unit setVariable [QGVAR(intel), _intelEntries - (_intelEntries select {_x select 3 == 0}), true];

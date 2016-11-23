@@ -4,7 +4,6 @@
 
 [QGVAR(addIntel), {
     params ["_intelID", "_intelName", "_intelText", "_intelType", "_unit"];
-    diag_log str _this;
 
     private _actionID = [
         "intel" + str _intelID,
@@ -15,11 +14,11 @@
 
             (_args select 0) hintC (_args select 1);
         },
-        {true},
+        {(isPlayer _target)},
         {},
         [_intelName, _intelText]
     ] call ace_interact_menu_fnc_createAction;
-    private _actionFullPath = [_unit, 1, ["ACE_SelfActions", QGVAR(intelNodeSelf), ([QGVAR(heardIntel), QGVAR(objectIntel)] select _intelType)], _actionID] call ace_interact_menu_fnc_addActionToObject;
+    private _actionFullPath = [_unit, 1, ["ACE_SelfActions", QGVAR(intelNodeSelf)], _actionID] call ace_interact_menu_fnc_addActionToObject;
 
     // Add the intel to the intel array with the new action path
     private _ownedIntel = _unit getVariable [QGVAR(intel), []];
