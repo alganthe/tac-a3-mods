@@ -1,5 +1,5 @@
 PREP(getIntel);
-PREP(handleKilled);
 PREP(insertIntelChildren);
+PREP(insertIntelChildrenCheckIntel);
 PREP(newIntel);
 PREP(shareIntel);

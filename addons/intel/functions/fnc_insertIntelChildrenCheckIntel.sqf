@@ -24,11 +24,16 @@ private _actions = [];
         _intelName,
         "",
         {
-            _this call FUNC(shareIntel);
+            params ["", "", "_args"];
+
+            [_args select 2, false, 15, 0] call ace_common_fnc_displayText;
         },
-        {alive _target && {isPlayer _target}},
+        {true},
         {},
-        _x
+        _x,
+        "",
+        nil,
+        [false, false, false, true, false]
     ] call ace_interact_menu_fnc_createAction;
     _actions pushBack [_action, [], _target];
 } forEach (_player getVariable [QGVAR(intel), []]);

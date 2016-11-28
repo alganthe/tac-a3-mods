@@ -34,6 +34,7 @@ class CfgVehicles {
                 displayName = "Intel";//To be localized
                 condition = QUOTE(GVAR(enabled));
                 statement = "";
+                insertChildren = QUOTE([ARR_2(_this select 0, _this select 1)] call FUNC(insertIntelChildrenCheckIntel));
                 showDisabled = 1;
                 priority = 2;
             };
