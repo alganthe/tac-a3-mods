@@ -4,6 +4,9 @@ ADDON = false;
 
 #include "XEH_PREP.hpp"
 
-GVAR(intelID) = 0;
+if (isServer) then {
+    GVAR(intelID) = 0;
+    GVAR(intelTracked) = [];
+};
 
 ADDON = true;

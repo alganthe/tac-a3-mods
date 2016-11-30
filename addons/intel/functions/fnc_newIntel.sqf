@@ -15,7 +15,7 @@
  * [cursorObject, "Hard drive", parseText "weeeee <br/> Second line"] call tac_intel_fnc_newIntel;
 */
 #include "script_component.hpp"
-if (!params [["_object", objNull, [objNull]],  ["_intelName", "", [""]], ["_intelText", "", [""]], ["_intelType", false, [false]]]) exitWith {
+if (!params [["_objects", []],  ["_intelName", "", [""]], ["_intelText", "", [""]], ["_intelType", false, [false]]]) exitWith {
     ERROR("Bad Params");
 };
 
@@ -23,14 +23,23 @@ if (!isServer) exitWith {
     ERROR("Function is only allowed to be called on the server");
 };
 
-GVAR(intelID) = GVAR(intelID) + 1;
+private _newIntel = GVAR(intelTracked);
 
-if !(_object isKindOf "CAManBase") then {
-    [QGVAR(addACEInteraction), [_object, GVAR(intelID)], "intel" + str GVAR(intelID)] call CBA_fnc_globalEventJIP;
-};
+{
+    GVAR(intelID) = GVAR(intelID) + 1;
 
-private _ownedIntel = _object getVariable [QGVAR(intel), []];
+    if !(_x isKindOf "CAManBase") then {
+        [QGVAR(addACEInteraction), [_x, GVAR(intelID)], "intel" + str GVAR(intelID)] call CBA_fnc_globalEventJIP;
+    };
 
-_ownedIntel pushbackUnique [GVAR(intelID), _intelName, _intelText, _intelType];
+    private _ownedIntel = _x getVariable [QGVAR(intel), []];
 
-_object setVariable [QGVAR(intel), _ownedIntel, true];
+    _ownedIntel pushbackUnique [GVAR(intelID), _intelName, _intelText, _intelType];
+    _newIntel pushbackUnique [GVAR(intelID), _intelName, _intelText, _intelType, false, _x];
+
+    _x setVariable [QGVAR(intel), _ownedIntel, true];
+
+} foreach _objects;
+
+GVAR(intelTracked) = _newIntel;
+publicVariable QGVAR(intelTracked);

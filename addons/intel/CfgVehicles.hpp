@@ -7,14 +7,14 @@ class CfgVehicles {
                     displayName = "Intel";//To be localized
                     condition = QUOTE(GVAR(enabled));
                     statement = "";
-                    showDisabled = 0;
+                    showDisabled = 1;
                     priority = 2;
 
                     class GVAR(getIntel) {
                         displayName = "Get intel";//To be localized
                         condition =  QUOTE(!isPlayer _target || (!alive _target) || (_target getVariable [ARR_2('ACE_isUnconscious',false)]));
-                        statement = QUOTE([(_this select 0)] call FUNC(getIntel));
-                        showDisabled = 0;
+                        statement = QUOTE([ARR_2(_this select 0, _this select 1)] call FUNC(getIntel));
+                        showDisabled = 1;
                         priority = 2;
                     };
 

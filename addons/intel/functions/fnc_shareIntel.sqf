@@ -22,3 +22,6 @@ _player setVariable [QGVAR(intel), (_player getVariable QGVAR(intel)) - [_intelP
 private _ownedIntel = _target getVariable [QGVAR(intel), []];
 _ownedIntel pushBackUnique [_intelID, _intelName, _intelText, _intelType];
 _target setVariable [QGVAR(intel), _ownedIntel, true];
+
+["Intel shared", false, 2, 0] call ace_common_fnc_displayText;
+[QGVAR(updateTrackedIntel), [[[_intelID, _intelName, _intelText, _intelType, true, _target]]]] call CBA_fnc_serverEvent;
