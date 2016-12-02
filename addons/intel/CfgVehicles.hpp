@@ -48,4 +48,40 @@ class CfgVehicles {
             };
         };
     };
+
+    class ACE_Module;
+    class GVAR(module): ACE_module {
+        author = ECSTRING(main,Author);
+        category = "TAC";
+        displayName = "New intel";//To be localized
+        function = QFUNC(moduleNewIntel);
+        isGlobal = 0;
+        isTriggerActivated = 0;
+        scope = 2;
+
+        class Arguments {
+            class Name {
+                displayName = "Intel name";//To be localized
+                description = "Name shown in the interaction menu";//To be localized
+                typeName = "STRING";
+                defaultValue = "";
+            };
+            class Text {
+                displayName = "Intel text";//To be localized
+                description = "Content of the intel";//To be localized
+                typeName = "STRING";
+                defaultValue = "";
+            };
+            class Type {
+                displayName = "Delete object after pick up";//To be localized
+                description = "Delete the object the intel is assigned to after a player pick it up";//To be localized
+                typeName = "BOOL";
+                defaultValue = 1;
+            };
+        };
+
+        class ModuleDescription {
+            description = "Create new intel";//To be localized
+        };
+    };
 };
